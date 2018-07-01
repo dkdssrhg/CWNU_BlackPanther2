@@ -25,7 +25,7 @@ typedef enum now_status{
 	normal = 0,
 	v_limit = 1,
 	AEB = 2
-}status_t;
+}status_t;	// 주행 상태 구분
 
 typedef enum scan_state{
 	none = 11,
@@ -36,7 +36,8 @@ typedef enum scan_state{
 	middle = 22,
 	over_left = 31,
 	big_over_left = 41
-}scan_state_t;
+}scan_state_t;	// Line scan camera state machine
+
 /******************************************************************************/
 /*-----------------------------Data Structures--------------------------------*/
 /******************************************************************************/
