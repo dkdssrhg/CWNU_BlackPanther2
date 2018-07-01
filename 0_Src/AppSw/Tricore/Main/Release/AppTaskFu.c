@@ -48,6 +48,8 @@ void appTaskfu_10ms(void)
 	if(task_cnt_10m%2 == 0){
 		BasicLineScan_run();
 		InfineonRacer_detectLane();
+		InfineonRacer_Avoid(task_cnt_1m);
+		InfinedonRacer_AEB();
 		BasicPort_run();
 		BasicGtmTom_run();
 		BasicVadcBgScan_run();
