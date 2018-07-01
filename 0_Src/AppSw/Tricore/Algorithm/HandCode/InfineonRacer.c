@@ -263,7 +263,7 @@ void get_error(void)
 }
 
 void InfineonRacer_ControlSrv(void)   //error_value에 따라 서브모터의 angle 을 변형시킨다.
-{//
+{
 	if( Angle < -0.2)
 		IR_getSrvAngle() = -0.2;
 	else if((Angle < -0.15) && (Angle >= -0.2))
