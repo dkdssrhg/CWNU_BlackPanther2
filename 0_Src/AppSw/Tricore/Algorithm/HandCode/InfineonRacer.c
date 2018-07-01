@@ -53,6 +53,8 @@ uint32 check_left;
 uint32 check_right;
 uint32 Find_Timecnt;
 uint32 pixel_count_cross;
+uint32 WhiteLane_cnt_left;
+uint32 WhiteLane_cnt_right;
 
 status_t status;
 scan_state_t SCAN_STATE;
@@ -88,6 +90,8 @@ void InfineonRacer_init(void){
 	IR_Motor.Motor0Vol = 0.25;
 	IR_getSrvAngle() = 0.0;
 
+	WhiteLane_cnt_left = 0;
+	WhiteLane_cnt_right = 0;
 	Find_Timecnt = 0;
 
 	Left0 = 25;
@@ -128,6 +132,15 @@ void InfineonRacer_detectLane(void){
 				check_right = 1;
 			}
 		}
+	}
+
+	if(status == v_limit)
+	{
+		if(check_right > check_left)   //값이 높은 곳이 하얀선
+			WhiteLane_cnt_right++;
+
+		else if(check_left > check_right)
+			WhiteLane_cnt_left++;
 	}
 
 	set_scan_state(check_left,check_right);
