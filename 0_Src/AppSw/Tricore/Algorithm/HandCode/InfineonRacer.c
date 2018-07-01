@@ -274,3 +274,85 @@ void InfineonRacer_ControlSrv(void)   //error_value에 따라 서브모터의 angle 을 �
 }
 
 
+/******************************************************************************/
+/*----------------------------- AVIOD  OBJECTS -------------------------------*/
+/******************************************************************************/
+
+void InfineonRacer_Avoid(sint32 task_cnt)
+{
+	float IR_Value;
+	IR_Value = IR_getChn15();
+
+	while(status == v_limit)
+	{
+		if(IR_Value >= 1.1)
+		{
+			//preIR_Value=IR_Value;
+			if(WHITE_LEFT > WHITE_RIGHT)
+			{
+					IR_getSrvAngle() = -0.1;
+					IR_Value = IR_getChn15();
+					task_cnt=0;
+					while(task_cnt <= 200)
+					{}
+
+					//IR_getSrvAngle()= Kp*IR_Value + Kd*(IR_Value-preIR_Value)
+					if((IR_Value < 1.1)&&(task_cnt>=200))
+					{
+						IR_getSrvAngle() = 0.1;
+						task_cnt=0;
+						while(task_cnt <= 150)
+						{}
+					}
+
+					if(task_cnt>=150)
+					{
+						IR_getSrvAngle() = 0.0;
+					}
+			}
+
+			else if(WHITE_LEFT < WHITE_RIGHT)
+			{
+					IR_getSrvAngle() = 0.1;
+					IR_Value = IR_getChn15();
+					task_cnt=0;
+					while(task_cnt <= 200)
+					{}
+
+					//IR_getSrvAngle()= Kp*IR_Value + Kd*(IR_Value-preIR_Value)
+					if((IR_Value < 1.1)&&(task_cnt>=200))
+					{
+						IR_getSrvAngle() = -0.1;
+						task_cnt=0;
+						while(task_cnt <= 150)
+						{}
+					}
+
+					if(task_cnt>=150)
+					{
+						IR_getSrvAngle() = 0.0;
+					}			}
+			WHITE_LEFT = 0;
+			WHITE_RIGHT = 0;
+		}
+	}
+}
+
+/* AEB Action */
+void InfinedonRacer_AEB(void)
+{
+	float IR_AEB_Value;
+	float AEB_speed = 0.4;
+	IR_AEB_Value = IR_getChn15();
+
+	while(status == AEB)
+	{
+		if(AEB_speed == 0)
+			AEB_speed = 0;
+
+		if(IR_AEB_Value >= 0.8)
+		{
+			AEB_speed = AEB_speed - 0.05;
+		}
+	}
+}
