@@ -304,13 +304,12 @@ void InfineonRacer_Avoid(sint32 task_cnt)
 			if(WHITE_LEFT > WHITE_RIGHT)
 			{
 					IR_getSrvAngle() = -0.1;
-					IR_Value = IR_getChn15();
 					task_cnt=0;
 					while(task_cnt <= 200)
 					{}
 
 					//IR_getSrvAngle()= Kp*IR_Value + Kd*(IR_Value-preIR_Value)
-					if((IR_Value < 1.1)&&(task_cnt>=200))
+					if((task_cnt>=200))
 					{
 						IR_getSrvAngle() = 0.1;
 						task_cnt=0;
@@ -344,7 +343,8 @@ void InfineonRacer_Avoid(sint32 task_cnt)
 					if(task_cnt>=150)
 					{
 						IR_getSrvAngle() = 0.0;
-					}			}
+					}
+			}
 			WHITE_LEFT = 0;
 			WHITE_RIGHT = 0;
 		}
