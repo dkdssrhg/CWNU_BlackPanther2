@@ -54,6 +54,8 @@ uint32 check_left;
 uint32 check_right;
 uint32 Find_Timecnt;
 uint32 pixel_count_cross;
+uint32 WhiteLane_cnt_left;
+uint32 WhiteLane_cnt_right;
 
 status_t status;
 scan_state_t SCAN_STATE;
@@ -89,6 +91,8 @@ void InfineonRacer_init(void){
 	IR_Motor.Motor0Vol = 0.25;
 	IR_getSrvAngle() = 0.0;
 
+	WhiteLane_cnt_left = 0;
+	WhiteLane_cnt_right = 0;
 	Find_Timecnt = 0;
 
 	Left0 = 25;
@@ -129,6 +133,15 @@ void InfineonRacer_detectLane(void){
 				check_right = 1;
 			}
 		}
+	}
+
+	if(status == v_limit)
+	{
+		if(check_right > check_left)   //값이 높은 곳이 하얀선
+			WhiteLane_cnt_right++;
+
+		else if(check_left > check_right)
+			WhiteLane_cnt_left++;
 	}
 
 	set_scan_state(check_left,check_right);
@@ -197,7 +210,7 @@ void Find_Cross(void)
 
 	Find_Timecnt++;
 
-	if((pixel_count_cross >= 50) && (Find_Timecnt >= 50))	// 0~128픽셀 중 흑색 픽셀이 50이상인 경우, status가 1초 주기로 변경된다.
+	if((pixel_count_cross >= 60) && (pixel_count_cross <= 100) && (Find_Timecnt >= 50))	// 0~128픽셀 중 흑색 픽셀이 50이상인 경우, status가 1초 주기로 변경된다.
 	{
 		if(status == normal)		// normal 상태이면
 		{
