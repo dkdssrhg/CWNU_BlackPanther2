@@ -196,7 +196,7 @@ void Find_Cross(void)
 
 	Find_Timecnt++;
 
-	if((pixel_count_cross >= 50) && (Find_Timecnt >= 50))	// 0~128픽셀 중 흑색 픽셀이 50이상인 경우, status가 1초 주기로 변경된다.
+	if((pixel_count_cross >= 60) && (pixel_count_cross <= 100) && (Find_Timecnt >= 50))	// 0~128픽셀 중 흑색 픽셀이 50이상인 경우, status가 1초 주기로 변경된다.
 	{
 		if(status == normal)		// normal 상태이면
 		{
