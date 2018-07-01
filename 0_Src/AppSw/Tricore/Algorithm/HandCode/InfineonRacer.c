@@ -301,7 +301,7 @@ void InfineonRacer_Avoid(sint32 task_cnt)
 		if(IR_Value >= 1.1)
 		{
 			//preIR_Value=IR_Value;
-			if(WHITE_LEFT > WHITE_RIGHT)
+			if(WhiteLane_cnt_left > WhiteLane_cnt_right)
 			{
 					IR_getSrvAngle() = -0.1;
 					IR_Value = IR_getChn15();
@@ -324,7 +324,7 @@ void InfineonRacer_Avoid(sint32 task_cnt)
 					}
 			}
 
-			else if(WHITE_LEFT < WHITE_RIGHT)
+			else if(WhiteLane_cnt_right < WhiteLane_cnt_left)
 			{
 					IR_getSrvAngle() = 0.1;
 					IR_Value = IR_getChn15();
@@ -345,8 +345,8 @@ void InfineonRacer_Avoid(sint32 task_cnt)
 					{
 						IR_getSrvAngle() = 0.0;
 					}			}
-			WHITE_LEFT = 0;
-			WHITE_RIGHT = 0;
+			WhiteLane_cnt_left = 0;
+			WhiteLane_cnt_right = 0;
 		}
 	}
 }
