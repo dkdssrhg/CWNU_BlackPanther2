@@ -41,5 +41,7 @@ IFX_EXTERN InfineonRacer_t IR_Ctrl;
 IFX_EXTERN void InfineonRacer_init(void);
 IFX_EXTERN void InfineonRacer_detectLane(void);
 IFX_EXTERN void InfineonRacer_control(void);
+IFX_EXTERN void InfineonRacer_Avoid(sint32 task_cnt);
+IFX_EXTERN void InfinedonRacer_AEB(void);
 
 #endif
